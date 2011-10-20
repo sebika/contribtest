@@ -1,4 +1,4 @@
-{"title": "My awesome site", "layout": "base.html"}
+{"title": "My awesome site", "layout": "home.html"}
 ---
 
 blah blah
