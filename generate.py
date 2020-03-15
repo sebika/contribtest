@@ -17,6 +17,7 @@ from logger import init_logger
 
 
 def generate_site(source_folder, output_folder):
+    log = init_logger(__name__)
     log.info('Generating site from %r', source_folder)
 
     layouts_folder_path = source_folder + '/layout'
@@ -41,5 +42,4 @@ def main():
 
 
 if __name__ == '__main__':
-    log = init_logger(__name__)
     main()
