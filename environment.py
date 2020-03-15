@@ -4,7 +4,7 @@ from jinja2.loaders import FileSystemLoader
 from parser import parse_file
 
 def list_files(folder_path, extension):
-    # find all the files in folder_path with a specified extension
+    # Find all the files in folder_path with a specified extension
     for name in os.listdir(folder_path):
         base, ext = os.path.splitext(name)
         if ext != extension:
@@ -13,10 +13,13 @@ def list_files(folder_path, extension):
 
 
 def init_jinja_environment(layouts_folder_path):
-    # create and initialize jinja parameters
+    # Create and initialize jinja parameters
     jinja_env = Environment()
     jinja_env.loader = FileSystemLoader(layouts_folder_path)
+
+    # Set trim_block to True to avoid blank lines in output
     jinja_env.trim_blocks = True
+
     return jinja_env
 
 
@@ -25,6 +28,7 @@ def generate_html(file_path, jinja_env):
     template_name = get_template_name(metadata)
     template = jinja_env.get_template(template_name)
     html = template.render(metadata)
+
     return html, template_name
 
 def get_template_name(metadata):

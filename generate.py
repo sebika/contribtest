@@ -27,10 +27,13 @@ def generate_site(source_folder, output_folder):
     log.info('Jinja environment created successfully')
 
     for file_path in list_files(source_folder, '.rst'):
+        # Get the html content and the template used to construct the html
         html, template_name = generate_html(file_path, jinja_env)
+
+        # Write to the file and pass the information to the logger
         output_file_name = Path(file_path).stem + '.html'
         write_output(output_folder, output_file_name, html)
-        log.info("Writing %r with template %r", output_file_name, template_name)
+        log.info("Wrote %r with template %r", output_file_name, template_name)
 
 
 def main():

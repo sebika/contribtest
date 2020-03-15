@@ -6,7 +6,7 @@ separator = '---'
 
 def parse_file(file_path):
     # Save data into a json before you find the separator
-    # or save the data into text content
+    # After you find the separator save the data to text_content
     separator_found = False
     json_data = ""
     text_content = ""
@@ -22,6 +22,7 @@ def parse_file(file_path):
                 text_content += line
 
     metadata = loads(json_data)
+
     # We need a 'content' key in metadata because both layouts requires one
     metadata['content'] = text_content
 
