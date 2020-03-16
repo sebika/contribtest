@@ -1,11 +1,27 @@
-import pytest
+import os
+import shutil
 from filecmp import cmp
 from generate import generate_site
 from environment import list_files
 
 
 # Test whether generate_site method creates the reference sites
+# All the paths needs to be correct for the test to work
 def test_generate_site():
+    # This could be a setup function
+
+    # Delete the output folder and create an empty new one
+    # This must be done independently
+    try:
+        shutil.rmtree('output')
+    except:
+        pass
+    try:
+        os.mkdir('output')
+    except:
+        pass
+
+
     source_folder = 'test/source'
     output_folder = 'output'
     generate_site(source_folder, output_folder)

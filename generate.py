@@ -7,6 +7,7 @@
 # the generated `output` should be the same as `test/expected_output`
 
 import sys
+import logging
 from pathlib import Path
 from parser import parse_file
 from writer import write_output
@@ -17,7 +18,7 @@ from logger import init_logger
 
 
 def generate_site(source_folder, output_folder):
-    log = init_logger(__name__)
+    log = init_logger(__name__, logging.INFO)
     log.info('Generating site from %r', source_folder)
 
     layouts_folder_path = source_folder + '/layout'
@@ -27,14 +28,28 @@ def generate_site(source_folder, output_folder):
     jinja_env = init_jinja_environment(layouts_folder_path)
     log.info('Jinja environment created successfully')
 
-    for file_path in list_files(source_folder, '.rst'):
-        # Get the html content and the template used to construct the html
-        html, template_name = generate_html(file_path, jinja_env)
+    try:
+        for file_path in list_files(source_folder, '.rst'):
+            # Get the html content and the template used to construct the html
+            html, template_name = generate_html(file_path, jinja_env)
 
-        # Write to the file and pass the information to the logger
-        output_file_name = Path(file_path).stem + '.html'
-        write_output(output_folder, output_file_name, html)
-        log.info("Wrote %r with template %r", output_file_name, template_name)
+            # Write to the file and pass the information to the logger
+            output_file_name = Path(file_path).stem + '.html'
+            write_output(output_folder, output_file_name, html)
+            log.info("Wrote %r with template %r", output_file_name, template_name)
+
+        log.info("SUCCESS")
+
+    except FileNotFoundError:
+        log.critical("Input file or folder not found")
+        log.critical("Could not find necessary the files")
+        log.critical("Ending process ...")
+
+    except ValueError:
+        log.critical("Template not found in layout folder")
+        log.critical("Could not find necessary the files ...")
+        log.critical("Ending process ...")
+
 
 
 def main():

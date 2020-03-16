@@ -11,6 +11,7 @@ def parse_file(file_path):
     json_data = ""
     text_content = ""
 
+
     with open(file_path, 'r') as f:
         for line in f:
             if line.strip() == separator:
@@ -25,5 +26,4 @@ def parse_file(file_path):
 
     # We need a 'content' key in metadata because both layouts requires one
     metadata['content'] = text_content
-
     return metadata

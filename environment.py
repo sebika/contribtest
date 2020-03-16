@@ -2,6 +2,7 @@ import os
 from jinja2 import Environment
 from jinja2.loaders import FileSystemLoader
 from parser import parse_file
+import logging
 
 def list_files(folder_path, extension):
     # Find all the files in folder_path with a specified extension
@@ -23,8 +24,8 @@ def init_jinja_environment(layouts_folder_path):
     return jinja_env
 
 
-def generate_html(file_path, jinja_env):
-    metadata = parse_file(file_path)
+def generate_html(rst_file_path, jinja_env):
+    metadata = parse_file(rst_file_path)
     template_name = get_template_name(metadata)
     template = jinja_env.get_template(template_name)
     html = template.render(metadata)
@@ -35,4 +36,4 @@ def get_template_name(metadata):
     try:
         return metadata['layout']
     except:
-        raise ValueError('layout key not found in metadata dictionary')
+        raise ValueError("'layout' key not found in metadata dictionary")
