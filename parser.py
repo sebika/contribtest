@@ -4,9 +4,9 @@ from json import loads
 separator = '---'
 
 
+# Save data into a json before you find the separator
+# After you find the separator save the data to text_content
 def parse_file(file_path):
-    # Save data into a json before you find the separator
-    # After you find the separator save the data to text_content
     separator_found = False
     json_data = ""
     text_content = ""

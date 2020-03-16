@@ -6,10 +6,10 @@ from environment import list_files
 
 
 # Test whether generate_site method creates the reference sites
-# All the paths needs to be correct for the test to work
+# All the paths needs to be correct for this test to work
 def test_generate_site():
-    # This could be a setup function
 
+    # Both try/except blocks below could be a setup method
     # Delete the output folder and create an empty new one
     # This must be done independently
     try:
@@ -20,7 +20,6 @@ def test_generate_site():
         os.mkdir('output')
     except:
         pass
-
 
     source_folder = 'test/source'
     output_folder = 'output'

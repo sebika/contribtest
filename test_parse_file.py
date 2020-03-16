@@ -2,7 +2,7 @@ import pytest
 from parser import parse_file
 
 
-# Check if it raises the correct exception
+# Check if the method raises the correct exception
 def test_parse_file1():
     file_path = 'test/aaaaaaa.rst'
     with pytest.raises(FileNotFoundError) as e:

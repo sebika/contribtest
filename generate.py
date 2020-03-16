@@ -1,11 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# generate site from static pages, loosely inspired by Jekyll
-# run like this:
-#   ./generate.py test/source output
-# the generated `output` should be the same as `test/expected_output`
-
 import sys
 import logging
 from pathlib import Path
@@ -49,7 +44,6 @@ def generate_site(source_folder, output_folder):
         log.critical("Template not found in layout folder")
         log.critical("Could not find necessary the files ...")
         log.critical("Ending process ...")
-
 
 
 def main():
